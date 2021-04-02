@@ -70,10 +70,34 @@ def cost_partial_w(actual, predicted, b, x, w):
     return partials
 
 
+def cost_partial_b(actual, predicted, b, x, w):
+    """
+    computes the partial derivative of the cost function with 
+    respect to the bias b
+    
+    Parameters
+    ----------
+    actual : np.array of true values .
+    predicted : np.array of predicted values from the activation function.
+    b : current bias, b in wx+b
+    x : np.array of the inputs
+    w : the vector of the weights
+
+    Returns
+    -------
+    scalar, the partial derivative of the cost function with respect
+    to the bias b
+
+    """
+    return 2/len(x) * cost_function(actual, predicted) * activation_function(w.T@x+b)*(1-activation_function(w.T@x+b))
     
     
-    
-    
+# We first need to determing the weights and the bias using the gradient descent method
+
+
+
+
+# Now, we can use these weights and bias to give a prediction on some data: 
     
     
     
