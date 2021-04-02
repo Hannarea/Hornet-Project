@@ -94,7 +94,8 @@ def cost_partial_b(actual, predicted, b, x, w):
     
 # We first need to determing the weights and the bias using the gradient descent method
 
-
+# we start with random values for the weights: 
+    
 
 
 # Now, we can use these weights and bias to give a prediction on some data: 
