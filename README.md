@@ -14,6 +14,9 @@ https://www.kdnuggets.com/2018/10/simple-neural-network-python.html
 [4]
 https://towardsdatascience.com/introduction-to-math-behind-neural-networks-e8b60dbbdeba
 
+[5]
+https://victorzhou.com/blog/intro-to-neural-networks/
+
 ## Some Comments 
 - Maybe we should begin with the simplest case, a perceptron, as described in [4]
 - We need to decide what the inputs will be ... they should be numbers 

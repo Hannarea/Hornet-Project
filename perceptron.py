@@ -41,7 +41,7 @@ def cost_function(actual, predicted):
     a scalar, measurment of loss.
 
     """
-    return np.sum(np.square(actual - predicted))
+    return 1/len(actual)*np.sum(np.square(actual - predicted))
 
 def cost_partial_w(actual, predicted, b, x, w):
     """
