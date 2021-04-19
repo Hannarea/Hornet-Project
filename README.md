@@ -1,6 +1,15 @@
 # Hornet-Project
 This repo will contain all files pertaining to our hornets project. 
 
+## To Do:
+*Data:* 
+- Organize the data we are using (verified, photo attached) into one place
+- Convert the location data to rectangular coordinates
+- Write code to read in location data with verifications (to create a prior positive locations vector)
+- Label current images with 0's and 1's for the classification questions (color / stripes)
+*Code:*
+- get code up and running
+
 ## Some Resources (tbc)
 [1]
 https://medium.com/fuzz/machine-learning-classification-models-3040f71e2529#:~:text=So%20what%20are%20classification%20models,be%20applied%20to%20a%20dataset.
