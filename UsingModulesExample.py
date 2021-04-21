@@ -24,5 +24,6 @@ SubData = select_data(data, 0, ['Positive ID', 'Negative ID'])
 final = convert_binary(SubData, 0, 'Positive ID')
 
 
+# This is an array with the positive locations 
 L = positive_locations(final, 0, 1, 1)
 print(L)
