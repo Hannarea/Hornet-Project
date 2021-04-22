@@ -27,7 +27,16 @@ def convert_coordinates(location):
     an np.array with the new location values (in what coordiate system?)
 
     '''
+    #[lat,long]
+    #P is a coordinate for a reported sighting
+    #d(P,Q)
+    #minimize d(P,Q) where Q is confirmed sighting locations
+
+    
     return location # Replace this
+
+
+
 
     
     
@@ -37,16 +46,15 @@ def pdf(x):
 
     Parameters
     ----------
-    x : TYPE
-        DESCRIPTION.
+    x : scalar
 
     Returns
     -------
     a number between 0 and 1.
 
     """
-    sig = .44
-    return 1/sig/np.sqrt(2*np.pi)*np.exp(-1/2*(x/sig)**2)
+    D = 1
+    return 1- x/D
 
 x = np.linspace(0,1,20)
 plt.plot(x, pdf(x), 'ro')
@@ -102,6 +110,8 @@ def build_location_probabilities_vector(data, prior = np.array([[49.1494, -123.9
     a vector of the location probabilities for the data 
 
     '''
+    
+    #Hello Hanna
     
     location_probabilities = np.ones(len(prior)) # We know that the prior known cases were true
     k = len(prior)
