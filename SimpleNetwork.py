@@ -85,7 +85,6 @@ class OurNeuralNetwork:
         y_preds = np.apply_along_axis(self.feedforward, 1, data)
         # print('used this data:', )
         loss = mse_loss(all_y_trues, y_preds)
-        print("Epoch %d loss: %.3f" % (epoch, loss))
 
 #Define dataset
 data = np.array([
