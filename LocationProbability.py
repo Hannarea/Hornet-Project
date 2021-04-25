@@ -90,7 +90,7 @@ def pdf(x):
     a number between 0 and 1.
 
     """
-    D = 1
+    D = 400
     return 1- x/D
 
     
@@ -136,7 +136,7 @@ def build_location_probabilities_vector(data, distance, prior = np.array([[49.14
     Parameters
     ----------
     data : an matrix of previous sighting location infomation- given in format
-            [lab status, latitude, longitude] including the sightings in prior
+            [latitude, longitude] including the sightings in prior
     prior : an nx2 matrix of n previous locations, default is location of the first positive 
             case in the data on 9/19/2019
     distance : whatever function is being used to calculate the distance
@@ -153,8 +153,7 @@ def build_location_probabilities_vector(data, distance, prior = np.array([[49.14
     k = len(prior)
     for i in range(k, len(data)): # for each row in the data
         # Calculate the location_probability and add to our vector
-        p = location_probability(prior, convert_coordinates(data[i, 1:]), distance)
-        print(p)
+        p = location_probability(prior, data[i,:], distance)
         location_probabilities = np.append(location_probabilities, p)
         # add the location to priors if it was actually positive
         if data[i, 0] == 1: # 1 means 'Positive ID', we converted these already

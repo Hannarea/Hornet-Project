@@ -86,37 +86,26 @@ class OurNeuralNetwork:
         # print('used this data:', )
         loss = mse_loss(all_y_trues, y_preds)
 
-#Define dataset
-data = np.array([
-    [0,0,0],
-    [1,0,0],
-    [0,1,0],
-    [1,1,1]
-    ])
 
-all_y_trues = np.array([0, 0, 1, 1])
-
-# # Define dataset
+# EXAMPLE OF USE
+# #Define dataset
 # data = np.array([
-#   [-2, -1],  # Alice
-#   [25, 6],   # Bob
-#   [17, 4],   # Charlie
-#   [-15, -6], # Diana
-# ])
-# all_y_trues = np.array([
-#   1, # Alice
-#   0, # Bob
-#   0, # Charlie
-#   1, # Diana
-# ])
+#     [0,0,0],
+#     [1,0,0],
+#     [0,1,0],
+#     [1,1,1]
+#     ])
 
-# Train our neural network!
-network = OurNeuralNetwork()
-network.train(data, all_y_trues)
+# all_y_trues = np.array([0, 0, 1, 1])
 
 
-# Make some predictions
-x1 = np.array([0, 0, 0]) # 128 pounds, 63 inches
-x2 = np.array([1, 1, 1])  # 155 pounds, 68 inches
-print("x1: %.3f" % network.feedforward(x1)) # 0.951 - F
-print("x2: %.3f" % network.feedforward(x2)) # 0.039 - M
+# # Train our neural network!
+# network = OurNeuralNetwork()
+# network.train(data, all_y_trues)
+
+
+# # Make some predictions
+# x1 = np.array([0, 0, 0]) # 128 pounds, 63 inches
+# x2 = np.array([1, 1, 1])  # 155 pounds, 68 inches
+# print("x1: %.3f" % network.feedforward(x1)) # 0.951 - F
+# print("x2: %.3f" % network.feedforward(x2)) # 0.039 - M
