@@ -90,8 +90,11 @@ def pdf(x):
     a number between 0 and 1.
 
     """
-    D = 400
-    return 1- x/D
+    if x>30:
+        return 1
+    return 0
+    # sig = 100
+    # return 1- np.exp(-1/2*(x/sig)**2)
 
     
 

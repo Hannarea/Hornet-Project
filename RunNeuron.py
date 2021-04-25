@@ -54,26 +54,9 @@ locations = SubData[:,1:3]
 location_probabilities = build_location_probabilities_vector(locations, arc_length)
 
 # get the input data to tring the network [location_probability, Color, Abdomin]
-training_data = np.hstack((location_probabilities, SubData[:, 3:]))
-
+training_data = np.hstack((location_probabilities, SubData[:, 3], SubData[:, 4]))
+training_data = (training_data.reshape((3,785))).T
 ##############################################################################
-
-
-
-
-
-
-
-
-# For now, some fake data and answers: 
-data = np.array([
-    [0,0,0],
-    [1,0,0],
-    [0,1,0],
-    [1,1,1]
-    ])
-
-lab_status = np.array([0, 0, 1, 1])
 
 
 # ---------------
@@ -82,7 +65,7 @@ lab_status = np.array([0, 0, 1, 1])
 ###############################################################################
 
 network = OurNeuralNetwork()
-network.train(data, lab_status)
+network.train(training_data, lab_status)
 
 # Here are the resulting weights put on the location_prob, color, abdomin
 print('[location_prob, color, abdomin]')
@@ -92,7 +75,11 @@ print('Bias:\t', network.b)
 ###############################################################################
 
 
-
+# Our output to training the network: 
+# weights:
+    # [location_prob, color, abdomin]
+    # [-1.12998904 -1.35090052 -0.36456844]
+# Bias:	 -5.78491211151786
 
 
 # --------------------
@@ -100,9 +87,21 @@ print('Bias:\t', network.b)
 # --------------------
 ################################################################################
 
-x1 = np.array([0, 0, 0]) # 128 pounds, 63 inches
-x2 = np.array([1, 1, 1])  # 155 pounds, 68 inches
-print("x1: %.3f" % network.feedforward(x1)) # 0.951 - F
-print("x2: %.3f" % network.feedforward(x2)) # 0.039 - M
+# network = OurNeuralNetwork()
+# network.b = -5.78491211151786
+# network.w = np.array([-1.12998904, -1.35090052, -0.36456844])
+
+test1 = np.array([1, 1, 0])
+ans = network.feedforward(test1)
+print(ans)
+
+test2 = np.array([0, 0, 1])
+print(network.feedforward(test2))
+
+
+# x1 = np.array([0, 0, 0]) # 128 pounds, 63 inches
+# x2 = np.array([1, 1, 1])  # 155 pounds, 68 inches
+# print("x1: %.3f" % network.feedforward(x1)) # 0.951 - F
+# print("x2: %.3f" % network.feedforward(x2)) # 0.039 - M
 
 ################################################################################
