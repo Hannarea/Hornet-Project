@@ -1,6 +1,6 @@
 import numpy as np
 
-# calculates the 
+
 def dot(inputs, weights):
     return np.dot(inputs, weights)
 

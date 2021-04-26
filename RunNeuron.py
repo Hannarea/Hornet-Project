@@ -19,7 +19,7 @@ from LocationProbability import build_location_probabilities_vector, arc_length
 # [Lab Status, Latitude, Longitude, Color, Abdomin]
 
 # Define the filepath for the data
-file_path = r'C:\Users\hreed\Documents\UCF\Projects\Hornet-Project\HornetNewData.xlsx'
+file_path = r'C:\Users\hreed\Documents\UCF\Projects\Hornet-Project\HornetNewDataWithPositiveCases.xlsx'
 
 # retrieve the selected columns
 data = convert_to_array(get_data_col(file_path, ['Lab Status', 'Latitude', 'Longitude', 'Color', 'Abdomen']))
@@ -55,7 +55,7 @@ location_probabilities = build_location_probabilities_vector(locations, arc_leng
 
 # get the input data to tring the network [location_probability, Color, Abdomin]
 training_data = np.hstack((location_probabilities, SubData[:, 3], SubData[:, 4]))
-training_data = (training_data.reshape((3,785))).T
+training_data = (training_data.reshape((3,798))).T
 ##############################################################################
 
 
@@ -91,12 +91,14 @@ print('Bias:\t', network.b)
 # network.b = -5.78491211151786
 # network.w = np.array([-1.12998904, -1.35090052, -0.36456844])
 
+
+
 test1 = np.array([1, 1, 0])
 ans = network.feedforward(test1)
-print(ans)
+print("we want near 1", ans)
 
 test2 = np.array([0, 0, 1])
-print(network.feedforward(test2))
+print("We want near 0", network.feedforward(test2))
 
 
 # x1 = np.array([0, 0, 0]) # 128 pounds, 63 inches
