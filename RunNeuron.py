@@ -75,12 +75,6 @@ print('Bias:\t', network.b)
 ###############################################################################
 
 
-# Our output to training the network: 
-# weights:
-    # [location_prob, color, abdomin]
-    # [-1.12998904 -1.35090052 -0.36456844]
-# Bias:	 -5.78491211151786
-
 
 # --------------------
 # Run some test cases
@@ -91,19 +85,14 @@ print('Bias:\t', network.b)
 # network.b = -5.78491211151786
 # network.w = np.array([-1.12998904, -1.35090052, -0.36456844])
 
-
-
 test1 = np.array([1, 1, 0])
 ans = network.feedforward(test1)
 print("we want near 1", ans)
 
+testa = np.array([0,1,0])
+print(network.feedforward(testa))
+
 test2 = np.array([0, 0, 1])
 print("We want near 0", network.feedforward(test2))
-
-
-# x1 = np.array([0, 0, 0]) # 128 pounds, 63 inches
-# x2 = np.array([1, 1, 1])  # 155 pounds, 68 inches
-# print("x1: %.3f" % network.feedforward(x1)) # 0.951 - F
-# print("x2: %.3f" % network.feedforward(x2)) # 0.039 - M
 
 ################################################################################
