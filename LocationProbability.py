@@ -90,11 +90,11 @@ def pdf(x):
     a number between 0 and 1.
 
     """
-    if x>30:
-        return 1
-    return 0
-    # sig = 100
-    # return 1- np.exp(-1/2*(x/sig)**2)
+  
+    sig = 100
+    a = np.exp(-1/2*(x/sig)**2)
+    return a
+
 
     
 
@@ -154,12 +154,16 @@ def build_location_probabilities_vector(data, distance, prior = np.array([[49.14
     
     location_probabilities = np.ones(len(prior)) # We know that the prior known cases were true
     k = len(prior)
-    for i in range(k, len(data)): # for each row in the data
+    for i in range(k, len(data)): # for each row in the data past priors
         # Calculate the location_probability and add to our vector
         p = location_probability(prior, data[i,:], distance)
+        
+        #Add this probability to the vector
         location_probabilities = np.append(location_probabilities, p)
+        
         # add the location to priors if it was actually positive
         if data[i, 0] == 1: # 1 means 'Positive ID', we converted these already
+            
             prior = np.vstack([prior, data[i, 1:]])
         # repeat!
     return location_probabilities

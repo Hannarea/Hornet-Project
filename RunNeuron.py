@@ -7,7 +7,7 @@ Created on Sun Apr 25 10:52:08 2021
 
 import numpy as np
 from SimpleNetwork import OurNeuralNetwork
-from readData import convert_to_array, get_data_col, select_data, convert_binary
+from readData import convert_to_array, get_data_col
 from LocationProbability import build_location_probabilities_vector, arc_length
 
 
@@ -59,13 +59,17 @@ training_data = (training_data.reshape((3,798))).T
 ##############################################################################
 
 
+
+
+
+
 # ---------------
 # Train the model
 # --------------- 
 ###############################################################################
 
 network = OurNeuralNetwork()
-network.train(training_data, lab_status)
+network.train_bce(training_data, lab_status)
 
 # Here are the resulting weights put on the location_prob, color, abdomin
 print('[location_prob, color, abdomin]')
@@ -85,14 +89,11 @@ print('Bias:\t', network.b)
 # network.b = -5.78491211151786
 # network.w = np.array([-1.12998904, -1.35090052, -0.36456844])
 
-test1 = np.array([1, 1, 0])
+test1 = np.array([1, 1, 1])
 ans = network.feedforward(test1)
 print("we want near 1", ans)
 
-testa = np.array([0,1,0])
-print(network.feedforward(testa))
-
-test2 = np.array([0, 0, 1])
+test2 = np.array([0, 0, 0])
 print("We want near 0", network.feedforward(test2))
 
 ################################################################################
