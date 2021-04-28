@@ -60,9 +60,6 @@ training_data = (training_data.reshape((3,798))).T
 
 
 
-
-
-
 # ---------------
 # Train the model
 # --------------- 
