@@ -90,6 +90,9 @@ test1 = np.array([1, 1, 1])
 ans = network.feedforward(test1)
 print("we want near 1", ans)
 
+test3 = np.array([0, 1, 0])
+print(network.feedforward(test3))
+
 test2 = np.array([0, 0, 0])
 print("We want near 0", network.feedforward(test2))
 
