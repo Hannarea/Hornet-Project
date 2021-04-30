@@ -65,14 +65,10 @@ location_probabilities = build_location_probabilities_vector(locations, arc_leng
 # workbook.close()
 
 
-for i in range(len(location_probabilities)):
-    if (location_probabilities[i]>1):
-        print(i)
 
-
-# # get the input data to tring the network [location_probability, Color, Abdomin]
-# training_data = np.hstack((location_probabilities, SubData[:, 3], SubData[:, 4]))
-# training_data = (training_data.reshape((3,798))).T
+# get the input data to tring the network [location_probability, Color, Abdomin]
+training_data = np.hstack((location_probabilities, SubData[:, 3], SubData[:, 4]))
+training_data = (training_data.reshape((3,775))).T
 ##############################################################################
 
 
@@ -82,26 +78,26 @@ for i in range(len(location_probabilities)):
 # --------------- 
 ###############################################################################
 
+network = OurNeuralNetwork()
+network.train_gradient_descent(training_data, lab_status)
+
+# Here are the resulting weights put on the location_prob, color, abdomin
+print('[location_prob, color, abdomin]')
+print(network.w)
+print('Bias:\t', network.b)
+
+###############################################################################
+
+
+
+# --------------------
+# Run some test cases
+# --------------------
+################################################################################
+
 # network = OurNeuralNetwork()
-# network.train_bce(training_data, lab_status)
-
-# # Here are the resulting weights put on the location_prob, color, abdomin
-# print('[location_prob, color, abdomin]')
-# print(network.w)
-# print('Bias:\t', network.b)
-
-# ###############################################################################
-
-
-
-# # --------------------
-# # Run some test cases
-# # --------------------
-# ################################################################################
-
-# # network = OurNeuralNetwork()
-# # network.b = -5.78491211151786
-# # network.w = np.array([-1.12998904, -1.35090052, -0.36456844])
+# network.b = -5.78491211151786
+# network.w = np.array([-1.12998904, -1.35090052, -0.36456844])
 
 # test1 = np.array([1, 1, 1])
 # ans = network.feedforward(test1)
@@ -112,5 +108,32 @@ for i in range(len(location_probabilities)):
 
 # test2 = np.array([0, 0, 0])
 # print("We want near 0", network.feedforward(test2))
+
+
+# Generates 100 random sightings
+from random import random 
+
+test_cases = np.zeros((1000, 3))
+for i in range(1000):
+    test_cases[i, 0] = random()
+    if (random()>0.5):
+        test_cases[i,1] = 1
+    if (random()>0.5):
+        test_cases[i,2] = 1
+
+results = []
+for i in range(1000):
+    results.append(network.feedforward(test_cases[i]))
+    
+s = 0
+for i in range(1000):
+    if (test_cases[i,0]>0.75) and (test_cases[i,1] == test_cases[i,2] == 1):
+        s += 1
+print(s)
+
+
+for i in range(1000):
+    if results[i]>0.5:
+        print(results[i], i)
 
 ################################################################################
