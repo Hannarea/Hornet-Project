@@ -91,9 +91,8 @@ def pdf(x):
 
     """
   
-    sig = 100
-    a = np.exp(-1/2*(x/sig)**2)
-    return a
+    
+    return 1 - x/600
 
 
     

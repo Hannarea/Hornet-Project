@@ -31,7 +31,6 @@ SubData = data
 
 
 
-
 # -----------------------------------------------------
 # Convert the data to the proper format (an nx3 matrix): 
 #       [location_probability, Color, Abdomin]
@@ -52,6 +51,20 @@ for i in range(len(lab_status)):
 # Build the location_probabilities based on the latitude and longitude
 locations = SubData[:,1:3]
 location_probabilities = build_location_probabilities_vector(locations, arc_length)
+
+
+# # Writing the location probabilities to excel sheet 
+# import xlsxwriter
+# workbook = xlsxwriter.Workbook('location_probabilities_vector.xlsx')
+# worksheet = workbook.add_worksheet()
+# lst = []
+# for i in range(len(location_probabilities)):
+#     lst.append(location_probabilities[i])
+
+# worksheet.write_column(0,0,lst)
+# workbook.close()
+
+
 
 # get the input data to tring the network [location_probability, Color, Abdomin]
 training_data = np.hstack((location_probabilities, SubData[:, 3], SubData[:, 4]))
