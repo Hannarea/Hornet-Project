@@ -65,10 +65,14 @@ location_probabilities = build_location_probabilities_vector(locations, arc_leng
 # workbook.close()
 
 
+for i in range(len(location_probabilities)):
+    if (location_probabilities[i]>1):
+        print(i)
 
-# get the input data to tring the network [location_probability, Color, Abdomin]
-training_data = np.hstack((location_probabilities, SubData[:, 3], SubData[:, 4]))
-training_data = (training_data.reshape((3,798))).T
+
+# # get the input data to tring the network [location_probability, Color, Abdomin]
+# training_data = np.hstack((location_probabilities, SubData[:, 3], SubData[:, 4]))
+# training_data = (training_data.reshape((3,798))).T
 ##############################################################################
 
 
@@ -78,35 +82,35 @@ training_data = (training_data.reshape((3,798))).T
 # --------------- 
 ###############################################################################
 
-network = OurNeuralNetwork()
-network.train_bce(training_data, lab_status)
-
-# Here are the resulting weights put on the location_prob, color, abdomin
-print('[location_prob, color, abdomin]')
-print(network.w)
-print('Bias:\t', network.b)
-
-###############################################################################
-
-
-
-# --------------------
-# Run some test cases
-# --------------------
-################################################################################
-
 # network = OurNeuralNetwork()
-# network.b = -5.78491211151786
-# network.w = np.array([-1.12998904, -1.35090052, -0.36456844])
+# network.train_bce(training_data, lab_status)
 
-test1 = np.array([1, 1, 1])
-ans = network.feedforward(test1)
-print("we want near 1", ans)
+# # Here are the resulting weights put on the location_prob, color, abdomin
+# print('[location_prob, color, abdomin]')
+# print(network.w)
+# print('Bias:\t', network.b)
 
-test3 = np.array([0, 1, 0])
-print(network.feedforward(test3))
+# ###############################################################################
 
-test2 = np.array([0, 0, 0])
-print("We want near 0", network.feedforward(test2))
+
+
+# # --------------------
+# # Run some test cases
+# # --------------------
+# ################################################################################
+
+# # network = OurNeuralNetwork()
+# # network.b = -5.78491211151786
+# # network.w = np.array([-1.12998904, -1.35090052, -0.36456844])
+
+# test1 = np.array([1, 1, 1])
+# ans = network.feedforward(test1)
+# print("we want near 1", ans)
+
+# test3 = np.array([0, 1, 0])
+# print(network.feedforward(test3))
+
+# test2 = np.array([0, 0, 0])
+# print("We want near 0", network.feedforward(test2))
 
 ################################################################################
