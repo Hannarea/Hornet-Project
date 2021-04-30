@@ -6,15 +6,8 @@ Created on Mon Apr  5 17:00:02 2021
 """
 
 import numpy as np
-import math
-import matplotlib.pyplot as plt
 
 # This is intended to be used as a module from which location_probability can be called. 
-
-# To do: write code to plt the coordinates on 2D grid
-
-
-
 
 def arc_length(location1, location2):
     '''
@@ -42,64 +35,14 @@ def arc_length(location1, location2):
     guts = np.sin(d1)**2 + np.cos(p1)* np.cos(p2) * np.sin(d2)**2
     return 2*R*np.arcsin(np.sqrt(guts))
 
-#### Testing the arc_length function ###
-# The distance between Big Ben in London (51.5007° N, 0.1246° W) and 
-# The Statue of Liberty in
-# New York (40.6892° N, 74.0445° W) is 5574.8 km. 
-
-# a = np.array([51.5007, 0.1246])
-# b = np.array([40.6892, 74.0445])
-# print(arc_length(a, b))
-
-
-def convert_coordinates(location):
-    '''
-    converts location
-
-    Parameters
-    ----------
-    location : an np.array with the latitude and longitude
-
-    Returns
-    -------
-    an np.array with the new location values (in what coordiate system?)
-
-    '''
-    #[lat,long]
-    #P is a coordinate for a reported sighting
-    #d(P,Q)
-    #minimize d(P,Q) where Q is confirmed sighting locations
-
-    
-    return location # Replace this
-
-
-
-
-    
     
 def pdf(x):
-    """
-    
-    Parameters
-    ----------
-    x : scalar
-
-    Returns
-    -------
-    a number between 0 and 1.
-
-    """
-  
-    
     return 1 - x/600
 
 
-    
-
-# Euclidean Norm if using rectangular coordinates for locations 
 def norm (x, y):
     return np.sqrt((x[0]-y[0])**2+(x[1]-y[1])**2)
+
 
 def location_probability(prior, new, distance):
     """
@@ -121,13 +64,12 @@ def location_probability(prior, new, distance):
 
     """
     # Calculates the minimum norm
-    
     d = distance(prior[0,:], new)
     for i in range(len(prior)):
         if (d > distance(prior[i, :], new)):
             d = distance(prior[i, :], new)
+    
     return pdf(d)
-
 
 
 def build_location_probabilities_vector(data, distance, prior = np.array([[49.1494, -123.943]])):
@@ -149,8 +91,6 @@ def build_location_probabilities_vector(data, distance, prior = np.array([[49.14
 
     '''
     
-    #Hello Hanna
-    
     location_probabilities = np.ones(len(prior)) # We know that the prior known cases were true
     k = len(prior)
     for i in range(k, len(data)): # for each row in the data past priors
@@ -165,42 +105,7 @@ def build_location_probabilities_vector(data, distance, prior = np.array([[49.14
             
             prior = np.vstack([prior, data[i, 1:]])
         # repeat!
+    
     return location_probabilities
 
 
-
-# # Example - the red dots have high probability and the blue have low probability        
-# prior = np.array([[0,0]])
-# data = np.array([
-#     [0, 0, 0],
-#     [0, 0, 1],
-#     [0, -.5, .5],
-#     [0, .5, -.5],
-#     [0, -1, 0],
-#     [0, -.2, 0],
-#     [0, .2, 0],
-#     [0, 1, 0],
-#     [0, -.5, -.5],
-#     [0, .5, -.5],
-#     [0, 0, -1],
-#     [0, 0, .2],
-#     [0, 0, -.2],
-#     [1, .5, .5],
-#     [0, .7, .6], # Here, we have reds because of the true case right before
-#     [0, .6, .4],
-#     [0, .4, .55]
-#     ])
-# # norm and arc_length can be exchanged. 
-# v = build_location_probabilities_vector(data, norm, prior = prior)
-# print(v)
-
-# # the small dots show where the points like on the pdf. they should decrese as the points get farther from the origin in this example
-# for i in range(len(data)):
-#     if v[i] > 0.5:
-#         plt.plot(data[i,1], data[i,2], 'ro')
-#     else:
-#         plt.plot(data[i,1], data[i,2], 'bo')
-
-    
-
-    
