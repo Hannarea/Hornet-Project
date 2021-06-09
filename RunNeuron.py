@@ -10,8 +10,6 @@ from SimpleNetwork import OurNeuralNetwork
 from readData import convert_to_array, get_data_col
 from LocationProbability import build_location_probabilities_vector, arc_length
 
-
-
 # -------------------------------------------------------------
 # Read in the data to train the model with the required columns
 # -------------------------------------------------------------
@@ -27,8 +25,6 @@ data = convert_to_array(get_data_col(file_path, ['Lab Status', 'Latitude', 'Long
 SubData = data
 
 #############################################################################
-
-
 
 
 # -----------------------------------------------------
@@ -53,25 +49,22 @@ locations = SubData[:,1:3]
 location_probabilities = build_location_probabilities_vector(locations, arc_length)
 
 
-# # Writing the location probabilities to excel sheet 
-# import xlsxwriter
-# workbook = xlsxwriter.Workbook('location_probabilities_vector.xlsx')
-# worksheet = workbook.add_worksheet()
-# lst = []
-# for i in range(len(location_probabilities)):
-#     lst.append(location_probabilities[i])
+# Writing the location probabilities to excel sheet 
+import xlsxwriter
+workbook = xlsxwriter.Workbook('location_probabilities_vector.xlsx')
+worksheet = workbook.add_worksheet()
+lst = []
+for i in range(len(location_probabilities)):
+    lst.append(location_probabilities[i])
 
-# worksheet.write_column(0,0,lst)
-# workbook.close()
-
+worksheet.write_column(0,0,lst)
+workbook.close()
 
 
 # get the input data to tring the network [location_probability, Color, Abdomin]
 training_data = np.hstack((location_probabilities, SubData[:, 3], SubData[:, 4]))
 training_data = (training_data.reshape((3,775))).T
 ##############################################################################
-
-
 
 # ---------------
 # Train the model
@@ -89,26 +82,10 @@ print('Bias:\t', network.b)
 ###############################################################################
 
 
-
 # --------------------
 # Run some test cases
 # --------------------
 ################################################################################
-
-# network = OurNeuralNetwork()
-# network.b = -5.78491211151786
-# network.w = np.array([-1.12998904, -1.35090052, -0.36456844])
-
-# test1 = np.array([1, 1, 1])
-# ans = network.feedforward(test1)
-# print("we want near 1", ans)
-
-# test3 = np.array([0, 1, 0])
-# print(network.feedforward(test3))
-
-# test2 = np.array([0, 0, 0])
-# print("We want near 0", network.feedforward(test2))
-
 
 # Generates 100 random sightings
 from random import random 
@@ -136,4 +113,3 @@ for i in range(1000):
     if results[i]>0.5:
         print(results[i], i)
 
-################################################################################

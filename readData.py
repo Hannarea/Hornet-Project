@@ -5,14 +5,6 @@ Created on Tue Apr 20 14:08:02 2021
 @author: hreed
 """
 
-# This is intended to be used as a module for reading in data from the excel spreadsheet of data
-# Contains the following functions: 
-    # get_data_col
-    # convert_to_array
-    # convert_binary
-    # select_data
-    # positive_locations
-
 import pandas as pd
 import numpy as np
 
@@ -35,14 +27,8 @@ def get_data_col(file_path, columns):
     return df
     
 
-# # Example of how to use:
-# file_path = r'C:\Users\hreed\Documents\UCF\Projects\Hornet-Project\TestData.xlsx'
-# a = get_data_col(file_path, ['Size', 'Color', 'Binary'])
-
 def convert_to_array(data):
     '''
-    
-
     Parameters
     ----------
     data : a matrix of data, assumed to be integer valued 
@@ -53,12 +39,6 @@ def convert_to_array(data):
 
     '''
     return np.array(data)
-
-# b = convert_to_array(a)
-# print(a)
-# print(b)
-# print(a.shape)
-# print(b.shape)
 
 
 def convert_binary(data, col, true):
@@ -85,8 +65,6 @@ def convert_binary(data, col, true):
             
     return data
 
-# c = convert_binary(b, 2, 'yes')
-# print(c)
 
 def select_data(data, col, keep):
     '''
@@ -110,9 +88,6 @@ def select_data(data, col, keep):
         i+=1
     return data
 
-# keep = ['red', 'blue']
-# d = select_data(c, 1, keep)
-# print(d)
 
 def positive_locations(data, ID_col, keep, loc_col):
     '''
